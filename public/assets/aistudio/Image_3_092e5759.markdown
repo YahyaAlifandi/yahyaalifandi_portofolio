@@ -1,0 +1,225 @@
+---
+name: Neo-Editorial Developer Notebook
+colors:
+  surface: '#fbf8fc'
+  surface-dim: '#dcd9dd'
+  surface-bright: '#fbf8fc'
+  surface-container-lowest: '#ffffff'
+  surface-container-low: '#f6f2f7'
+  surface-container: '#f0edf1'
+  surface-container-high: '#eae7eb'
+  surface-container-highest: '#e4e1e6'
+  on-surface: '#1b1b1e'
+  on-surface-variant: '#434656'
+  inverse-surface: '#303033'
+  inverse-on-surface: '#f3f0f4'
+  outline: '#747688'
+  outline-variant: '#c4c5d9'
+  surface-tint: '#0e45fa'
+  primary: '#0035d0'
+  on-primary: '#ffffff'
+  primary-container: '#1b4bff'
+  on-primary-container: '#dbdeff'
+  inverse-primary: '#bac3ff'
+  secondary: '#735c00'
+  on-secondary: '#ffffff'
+  secondary-container: '#fecf27'
+  on-secondary-container: '#705900'
+  tertiary: '#990524'
+  on-tertiary: '#ffffff'
+  tertiary-container: '#bc2739'
+  on-tertiary-container: '#ffd6d5'
+  error: '#ba1a1a'
+  on-error: '#ffffff'
+  error-container: '#ffdad6'
+  on-error-container: '#93000a'
+  primary-fixed: '#dee1ff'
+  primary-fixed-dim: '#bac3ff'
+  on-primary-fixed: '#001159'
+  on-primary-fixed-variant: '#0031c5'
+  secondary-fixed: '#ffe087'
+  secondary-fixed-dim: '#efc112'
+  on-secondary-fixed: '#231a00'
+  on-secondary-fixed-variant: '#574500'
+  tertiary-fixed: '#ffdad9'
+  tertiary-fixed-dim: '#ffb3b3'
+  on-tertiary-fixed: '#410009'
+  on-tertiary-fixed-variant: '#920020'
+  background: '#fbf8fc'
+  on-background: '#1b1b1e'
+  surface-variant: '#e4e1e6'
+typography:
+  display:
+    fontFamily: Space Grotesk
+    fontSize: 56px
+    fontWeight: '700'
+    lineHeight: 64px
+    letterSpacing: -0.03em
+  display-mobile:
+    fontFamily: Space Grotesk
+    fontSize: 36px
+    fontWeight: '700'
+    lineHeight: 42px
+    letterSpacing: -0.02em
+  headline-lg:
+    fontFamily: Space Grotesk
+    fontSize: 36px
+    fontWeight: '700'
+    lineHeight: 44px
+    letterSpacing: -0.02em
+  headline-lg-mobile:
+    fontFamily: Space Grotesk
+    fontSize: 28px
+    fontWeight: '700'
+    lineHeight: 34px
+    letterSpacing: -0.02em
+  headline-md:
+    fontFamily: Space Grotesk
+    fontSize: 24px
+    fontWeight: '600'
+    lineHeight: 32px
+    letterSpacing: -0.01em
+  headline-sm:
+    fontFamily: Space Grotesk
+    fontSize: 18px
+    fontWeight: '600'
+    lineHeight: 26px
+    letterSpacing: -0.01em
+  body-lg:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 18px
+    fontWeight: '400'
+    lineHeight: 28px
+  body-md:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 15px
+    fontWeight: '400'
+    lineHeight: 24px
+  body-sm:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 13px
+    fontWeight: '400'
+    lineHeight: 20px
+  label-code:
+    fontFamily: JetBrains Mono
+    fontSize: 13px
+    fontWeight: '500'
+    lineHeight: 18px
+    letterSpacing: 0.02em
+  label-caps:
+    fontFamily: Space Grotesk
+    fontSize: 11px
+    fontWeight: '700'
+    lineHeight: 14px
+    letterSpacing: 0.08em
+  label-badge:
+    fontFamily: JetBrains Mono
+    fontSize: 11px
+    fontWeight: '600'
+    lineHeight: 14px
+    letterSpacing: 0.04em
+rounded:
+  sm: 0.125rem
+  DEFAULT: 0.25rem
+  md: 0.375rem
+  lg: 0.5rem
+  xl: 0.75rem
+  full: 9999px
+spacing:
+  gutter: 1.5rem
+  gutter-mobile: 1rem
+  margin: 2rem
+  margin-mobile: 1rem
+  space-xs: 0.25rem
+  space-sm: 0.5rem
+  space-md: 1rem
+  space-lg: 1.5rem
+  space-xl: 2.5rem
+  space-2xl: 4rem
+---
+
+## Brand & Style
+
+This design system embodies the intersection of tactile Japanese stationery, technical web craftsmanship, and neo-brutalist digital expression. It bridges the discipline of an engineering notebook with the playful curiosity of an interactive digital workshop. 
+
+### Visual Movement & Aesthetic Pillars
+- **Curated Workshop & Public Notebook:** Rooted in tactile stationery, physical stamps, taped artifacts, and systematic gridded notebooks. It positions the engineer not as a generic enterprise developer, but as a deliberate creative technologist who prototypes, writes tools, and experiments in public.
+- **Micro-Structured Brutalism:** Structural layout grids with razor-sharp 1px dark strokes, crisp dividers, architectural tabular columns, and tactile interactive surfaces. Avoids heavy mud or dark neo-brutalist shadows in favor of crisp ink-lines and high typographic precision.
+- **Playful Tactility:** High-contrast badge tags, skewed floating sticker labels (`transform: rotate(-2deg)`), tape overlays, and vibrant physical-like pigment swatches anchored atop a serene cream canvas.
+- **Bilingual & Technical Typography:** Monospaced system metrics, command-line indicators, and editorial headers that coexist seamlessly with dense Japanese kana/kanji and technical micro-labels.
+
+## Colors
+
+The palette is anchored by an organic, warm Japanese paper surface (`#F9F7F1`) paired with dense sumi ink (`#18181B`), punctuated by high-chroma primary accents drawn from risograph ink charts: Cobalt Blue, Energetic Marigold Yellow, and Coral Pink.
+
+### Palette Architecture
+- **Paper Canvas (`#F9F7F1`):** The master viewport and base container background, emulating uncoated fine stationery.
+- **Card Surface (`#FFFFFF`):** High-clarity white surface for interactive panels, code containers, and content blocks to create contrast without relying on visual fuzziness.
+- **Ink Primary (`#18181B`):** Deep charcoal-black for solid strokes, primary typography, borders, and dominant icon lines.
+- **Ink Secondary (`#52525B`):** Muted metadata, file paths, sub-labels, and technical annotations.
+- **Border / Rule Line (`#18181B`):** Structural 1px boundary lines with an optional secondary subtle hairline (`#E4E1D8`) for secondary grid subdivisions.
+- **Cobalt Blue (`#1B4BFF`):** Primary action color, active interactive triggers, code keywords, focused badges, and tech-focused chips.
+- **Electric Yellow (`#FFD028`):** Feature highlights, notification badges, sticky notes, and active directory markers.
+- **Coral Pink (`#FF5964`):** Experimental lab tags, alert status indicators, destructive buttons, and playful sticker accents.
+- **Mint Sage (`#10B981`):** System uptime, terminal output success status, and live production build tags.
+
+## Typography
+
+The typography creates dynamic tension between mathematical programming code and bold editorial catalog design.
+
+### Hierarchy & Family Pairing
+- **Headings (`Space Grotesk`):** Industrial, geometric, and assertive. Used in tight sentence cases and uppercase section banners (`label-caps`) to establish authoritative, print-inspired visual anchors.
+- **Body (`Plus Jakarta Sans`):** Warm, highly legible, modern sans-serif with open apertures. Keeps long-form case studies, notes, and technical explanations clean and effortless to read against paper surfaces.
+- **Code, Metrics & Data (`JetBrains Mono`):** Applied to file versions (`v0.71`), terminal code snippets, timestamps, interactive keyboard shortcuts, status badges, and technical parameter tables.
+
+## Layout & Spacing
+
+The layout is grounded in a clean architectural grid reminiscent of physical drafting books and modular Japanese periodicals.
+
+### Structural Framework
+- **Master Grid Layout:** A hybrid framework consisting of a fixed 64px vertical icon navigation rail on the desktop left border, coupled with a 12-column fluid grid system across the main view.
+- **Column Gaps & Margins:** Desktop features `2rem` screen margins and `1.5rem` gutters. Tablet collapses to 8 columns with `1.5rem` gutters. Mobile employs 4 columns with `1rem` margins and `1rem` gutters.
+- **Structural Dividing Dividers:** Rather than floating whitespace islands, sections are explicitly parsed using solid 1px `#18181B` border rules spanning the edge of content columns.
+- **Vertical Rhythm:** Strict multiples of 4px and 8px govern component spacing. Tight padding (`space-xs`, `space-sm`) is applied within stickers and tags, while expansive gaps (`space-xl`, `space-2xl`) frame major chapter breaks and interactive projects.
+
+## Elevation & Depth
+
+This system intentionally rejects Gaussian blurred shadows and translucent glassmorphism. Visual depth is strictly mechanical, physical, and graphic.
+
+### Mechanical Elevation Hierarchy
+1. **Flat Paper (Level 0):** Canvas plane (`#F9F7F1`) divided purely by 1px solid ink borders (`#18181B`).
+2. **Hard Offset Shift (Level 1 - Interactive Cards & Buttons):** Pure flat surface with a crisp 1px `#18181B` border and a solid 0-blur drop-shadow: `box-shadow: 3px 3px 0px #18181B`.
+3. **Lifted Action (Level 2 - Hover States & Drawers):** On pointer hover, interactive components translate up and left by 1px while the drop-shadow expands: `transform: translate(-1px, -1px); box-shadow: 5px 5px 0px #18181B`.
+4. **Physical Tactile Overlays (Level 3 - Stickers, Sticky Tape, Badges):** Skewed elements with slight rotation (`transform: rotate(-1.5deg)`) simulating washi tape or applied stickers, casting sharp 2px solid offset shadows (`2px 2px 0px rgba(24, 24, 27, 0.4)`).
+
+## Shapes
+
+The shape vocabulary uses subtle tactile softening (`0.25rem` / `4px`) rather than completely sharp edges or overly rounded pills. This evokes precision die-cut cards, stationery stamps, and archival slips.
+
+### Curvature Guidelines
+- **Core Elements (Level 1 - 4px):** Applied to cards, code containers, buttons, input fields, and dialog frames. Retains structural grid sharpness while preventing visual harshness.
+- **Pill Accents (Exception for Interactive Pills):** Category badges, search bars, and floating vertical toolbar icon buttons use fully rounded pill radiuses (`9999px`) to create functional distinction against the rectilinear grid.
+- **Tape & Sticky Tabs:** Straight geometric cuts with pseudo-element textured notches or masking tape banners on thumbnail corners.
+
+## Components
+
+### Buttons
+- **Primary Button:** `#1B4BFF` background with pure white text, 1px `#18181B` border, `box-shadow: 3px 3px 0px #18181B`, `font-family: Space Grotesk`, `font-weight: 700`, uppercase tracking. Active state shifts button down by 2px (`transform: translate(2px, 2px); box-shadow: 1px 1px 0px #18181B`).
+- **Secondary Button:** Pure white background, `#18181B` border, `#18181B` text, identical 3px hard drop-shadow. Hover swaps background to `#FFD028`.
+- **Ghost Utility Button:** Transparent background, 1px hairline border, monospace label (`JetBrains Mono`), hover adds an underline and arrow translation.
+
+### Chips & Badges
+- **Editorial Category Badges:** Pill-shaped or 4px-radius badges featuring a 1px solid ink border, solid riso colors (`#FFD028` for sketches, `#1B4BFF` with white text for WebGL/code, `#FF5964` with white text for scripts), uppercase `label-badge` typography.
+- **Status Indicator Badges:** Monospace status chip with a pulsating 6px solid green circle dot for "OPEN FOR WORK" or "ALWAYS IN BETA".
+
+### Project & Experiment Cards
+- **Editorial Modular Card:** Built from `#FFFFFF` paper container with a continuous 1px `#18181B` perimeter border. Features an image slot bounded by an internal bottom border, metadata footer with monospaced publish dates, title in `Space Grotesk`, and an arrow trigger that slides diagonally on card hover.
+- **TAPER Index Banners:** High-chroma vertical/horizontal categorized full-bleed color blocks (Coral, Yellow, Orange, Blue, Navy) featuring oversized single-letter typographic stamps with bi-lingual descriptive footnotes.
+
+### Sidebar & Navigation Rail
+- **Vertical Tool Dock:** Fixed left dock with 64px width, cream or white fill, 1px vertical right border. Contains circular or softened-square icon buttons with 1px stroke icons. Hovering triggers a high-contrast black tooltip (`#18181B` background, white mono text, 0-blur hard border) floating immediately to the right.
+- **Top Utility Header:** Compact 48px header displaying current version label (`VERSION 0.71 / ALWAYS IN BETA`), index breadcrumbs, and a tactile menu toggle button.
+
+### Inputs & Search Bars
+- **Search Bar:** Pill-shaped `#FFFFFF` surface with a crisp 1px `#18181B` border, monospaced placeholder text, trailing search icon, and a hard 2px offset ink shadow on focus.
+- **Checkboxes & Radios:** Hand-drawn/editorial aesthetic with a 1.5px solid border, 2px rounded corners, and a bold checkmark filled with `#1B4BFF` or `#FF5964`.

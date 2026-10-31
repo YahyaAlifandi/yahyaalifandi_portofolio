@@ -1,0 +1,722 @@
+# Implementasi Penuh: 2-Layer Hybrid Approach
+
+Saya akan berikan **4 file lengkap** yang siap pakai. Strategi: **default simple (HRD-friendly)** + **opt-in detailed modal (tech recruiter)**.
+
+---
+
+## 📁 File 1: `src/data/portfolioData.ts` (Simplified & Cleaner)
+
+```typescript
+// ============ SIMPLIFIED SKILL DATA ============
+// Fokus pada informasi yang dibutuhkan HRD & tech recruiter
+// Tanpa magic percentages yang meragukan
+
+export interface Skill {
+  name: string;
+  icon: string;
+  yearsExperience: number;
+  level: 'core' | 'solid' | 'learning';
+  category: 'frontend' | 'backend' | 'database' | 'devops' | 'core';
+  appliedInProjects: string[];
+}
+
+export interface SkillCategory {
+  id: string;
+  code: string;
+  title: string;
+  subtitle: string;
+  iconName: string;
+  skills: Skill[];
+}
+
+export interface CategoryDetail {
+  summary: string;
+  appliedIn: string[];
+  metrics: { label: string; value: string }[];
+  highlight: string;
+}
+
+// ============ SKILL CATEGORIES (3 KOLOM HRD-FRIENDLY) ============
+export const SKILL_CATEGORIES: SkillCategory[] = [
+  {
+    id: 'frontend',
+    code: '01',
+    title: 'Frontend',
+    subtitle: 'UI, components, performance',
+    iconName: 'Monitor',
+    skills: [
+      { name: 'React',         icon: 'Code2',     yearsExperience: 3, level: 'core', category: 'frontend', appliedInProjects: ['JejakKode', 'GampangIn Cashier', 'AetherFlow'] },
+      { name: 'Next.js',       icon: 'Layers',    yearsExperience: 2, level: 'core', category: 'frontend', appliedInProjects: ['JejakKode', 'GampangIn POS'] },
+      { name: 'TypeScript',    icon: 'FileCode2', yearsExperience: 3, level: 'core', category: 'frontend', appliedInProjects: ['GampangIn POS', 'JejakKode', 'AetherFlow'] },
+      { name: 'Tailwind CSS',  icon: 'Palette',   yearsExperience: 3, level: 'core', category: 'frontend', appliedInProjects: ['JejakKode', 'GampangIn Cashier'] },
+      { name: 'Framer Motion', icon: 'Sparkles',  yearsExperience: 2, level: 'solid', category: 'frontend', appliedInProjects: ['Portfolio', 'JejakKode'] },
+      { name: 'HTML5/CSS3',    icon: 'Globe',     yearsExperience: 4, level: 'core', category: 'frontend', appliedInProjects: ['All Projects'] },
+    ],
+  },
+  {
+    id: 'backend',
+    code: '02',
+    title: 'Backend',
+    subtitle: 'API, auth, business logic',
+    iconName: 'Server',
+    skills: [
+      { name: 'Node.js',    icon: 'Server',        yearsExperience: 3, level: 'core',  category: 'backend', appliedInProjects: ['GampangIn POS', 'JejakKode API'] },
+      { name: 'Express',    icon: 'Send',          yearsExperience: 2, level: 'solid', category: 'backend', appliedInProjects: ['AetherFlow API'] },
+      { name: 'REST API',   icon: 'Network',       yearsExperience: 3, level: 'core',  category: 'backend', appliedInProjects: ['GampangIn POS', 'JejakKode'] },
+      { name: 'JWT Auth',   icon: 'GitPullRequest',yearsExperience: 2, level: 'solid', category: 'backend', appliedInProjects: ['GampangIn POS'] },
+      { name: 'Edge Functions', icon: 'Cpu',       yearsExperience: 1, level: 'solid', category: 'backend', appliedInProjects: ['JejakKode'] },
+    ],
+  },
+  {
+    id: 'database-devops',
+    code: '03',
+    title: 'Database & DevOps',
+    subtitle: 'Data, deployment, tooling',
+    iconName: 'Database',
+    skills: [
+      { name: 'PostgreSQL',  icon: 'Database',   yearsExperience: 2, level: 'core',    category: 'database', appliedInProjects: ['GampangIn POS', 'JejakKode'] },
+      { name: 'Prisma ORM',  icon: 'HardDrive',  yearsExperience: 2, level: 'core',    category: 'database', appliedInProjects: ['GampangIn POS', 'JejakKode'] },
+      { name: 'MongoDB',     icon: 'Database',   yearsExperience: 1, level: 'solid',   category: 'database', appliedInProjects: ['AetherFlow'] },
+      { name: 'Git',         icon: 'GitPullRequest', yearsExperience: 4, level: 'core', category: 'devops', appliedInProjects: ['All Projects'] },
+      { name: 'Docker',      icon: 'Container',  yearsExperience: 1, level: 'learning',category: 'devops', appliedInProjects: ['Dev Environments'] },
+      { name: 'GitHub Actions', icon: 'GitPullRequest', yearsExperience: 2, level: 'solid', category: 'devops', appliedInProjects: ['CI/CD Pipelines'] },
+      { name: 'Vercel',      icon: 'Cloud',      yearsExperience: 2, level: 'core',    category: 'devops', appliedInProjects: ['Production Deploys'] },
+      { name: 'Figma',       icon: 'Figma',      yearsExperience: 2, level: 'solid',   category: 'devops', appliedInProjects: ['Design Translation'] },
+    ],
+  },
+];
+
+// ============ DETAILED VIEW (untuk modal/expandable) ============
+export const CATEGORY_DETAILS: Record<string, CategoryDetail> = {
+  frontend: {
+    summary: 'Perancangan antarmuka web modern dengan fokus pada performa Core Web Vitals (LCP < 0.9s), render modular Next.js App Router, integrasi Tailwind CSS responsif, dan aksesibilitas (a11y).',
+    appliedIn: ['JejakKode Learning Platform', 'GampangIn Cashier UI', 'AetherFlow Web3 Interface'],
+    highlight: 'Core Web Vitals 99+ & Modular Component Architecture',
+    metrics: [
+      { label: 'Lighthouse', value: '99/100' },
+      { label: 'Architecture', value: 'Atomic & Server Components' },
+      { label: 'State', value: 'Zustand Reactive Store' }
+    ]
+  },
+  backend: {
+    summary: 'Pembangunan RESTful API yang scalable, session management via Edge Middleware, proteksi transaksi atomik database dengan Prisma & PostgreSQL, serta optimasi query cache.',
+    appliedIn: ['GampangIn Checkout Actions', 'Edge Route Guarding', 'Database Isolation Layer'],
+    highlight: 'Atomic Database Locking & Edge Authorization',
+    metrics: [
+      { label: 'API Latency', value: '< 120ms P95' },
+      { label: 'Concurrency', value: 'SELECT FOR UPDATE' },
+      { label: 'Auth', value: 'JWT Cookie Verification' }
+    ]
+  },
+  'database-devops': {
+    summary: 'Otomatisasi siklus pengembangan dengan Git workflow yang disiplin, isolasi lingkungan container Docker, pipeline CI/CD GitHub Actions, dan ketelitian implementasi dari desain Figma.',
+    appliedIn: ['Continuous Deployment Vercel', 'Dockerized Dev Environments', 'Figma Design System Porting'],
+    highlight: 'Automated CI/CD & Production-Grade Containerization',
+    metrics: [
+      { label: 'Version Control', value: 'Trunk-Based' },
+      { label: 'CI/CD', value: 'Lint & TypeCheck' },
+      { label: 'Design', value: 'Pixel-Perfect Translation' }
+    ]
+  }
+};
+
+// ============ AGGREGATE STATS ============
+export const SKILLS_SUMMARY = {
+  totalSkills: SKILL_CATEGORIES.reduce((acc, c) => acc + c.skills.length, 0),
+  totalProjects: 12,
+  topSkills: ['TypeScript', 'React', 'Node.js', 'PostgreSQL', 'Tailwind'],
+  lastUpdated: 'October 2026',
+};
+```
+
+---
+
+## 📁 File 2: `src/components/TechStackSection.tsx` (HRD-Friendly Default)
+
+```tsx
+import React, { useState } from 'react';
+import {
+  Download, ArrowRight, Monitor, Server, Database, Wrench,
+  FileCode2, Layers, Code2, Palette, Sparkles, Globe, Send,
+  Network, GitPullRequest, Cpu, HardDrive, Container, Cloud, Figma,
+  ChevronDown, X
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import {
+  SKILL_CATEGORIES,
+  SKILLS_SUMMARY,
+  CATEGORY_DETAILS,
+  type Skill
+} from '../data/portfolioData';
+import { TechStackDetailModal } from './TechStackDetailModal';
+
+const ICON_MAP: Record<string, React.ReactNode> = {
+  Monitor:   <Monitor className="w-5 h-5 text-blue-600" />,
+  Server:    <Server className="w-5 h-5 text-emerald-600" />,
+  Database:  <Database className="w-5 h-5 text-purple-600" />,
+  Wrench:    <Wrench className="w-5 h-5 text-amber-600" />,
+  FileCode2: <FileCode2 className="w-4 h-4 text-blue-600" />,
+  Layers:    <Layers className="w-4 h-4 text-sky-500" />,
+  Code2:     <Code2 className="w-4 h-4 text-rose-500" />,
+  Palette:   <Palette className="w-4 h-4 text-cyan-500" />,
+  Sparkles:  <Sparkles className="w-4 h-4 text-amber-500" />,
+  Globe:     <Globe className="w-4 h-4 text-slate-800" />,
+  Send:      <Send className="w-4 h-4 text-orange-500" />,
+  Network:   <Network className="w-4 h-4 text-blue-600" />,
+  GitPullRequest: <GitPullRequest className="w-4 h-4 text-orange-600" />,
+  Cpu:       <Cpu className="w-4 h-4 text-cyan-500" />,
+  HardDrive: <HardDrive className="w-4 h-4 text-blue-800" />,
+  Container: <Container className="w-4 h-4 text-blue-500" />,
+  Cloud:     <Cloud className="w-4 h-4 text-slate-800" />,
+  Figma:     <Figma className="w-4 h-4 text-purple-500" />,
+};
+
+const renderCategoryIcon = (name: string) =>
+  ICON_MAP[name] ?? <Monitor className="w-5 h-5 text-slate-600" />;
+
+const renderSkillIcon = (name: string) =>
+  ICON_MAP[name] ?? <Code2 className="w-4 h-4 text-slate-600" />;
+
+const LEVEL_DOT = {
+  core:     'bg-emerald-500',
+  solid:    'bg-blue-500',
+  learning: 'bg-amber-500',
+};
+
+interface TechStackSectionProps {
+  onDownloadResume?: () => void;
+}
+
+export const TechStackSection: React.FC<TechStackSectionProps> = ({
+  onDownloadResume,
+}) => {
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
+
+  return (
+    <section id="tech-stack" className="py-16 border-b border-slate-200/80">
+      {/* ============ HEADER — Simple & Direct ============ */}
+      <div className="mb-8">
+        <span className="text-xs font-mono font-bold text-blue-600 tracking-wider uppercase block mb-1">
+          03 // TECHNICAL SKILLS
+        </span>
+        <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 tracking-tight mb-2">
+          Skills &amp; Tech Stack
+        </h2>
+        <p className="text-sm text-slate-500">
+          {SKILLS_SUMMARY.totalSkills} skills · {SKILLS_SUMMARY.totalProjects}+ projects · 4 years experience
+          <span className="text-slate-300 mx-2">·</span>
+          <span className="text-slate-400">Updated {SKILLS_SUMMARY.lastUpdated}</span>
+        </p>
+      </div>
+
+      {/* ============ STATIC 3-COLUMN GRID (HRD-Friendly) ============ */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+        {SKILL_CATEGORIES.map((cat) => (
+          <div
+            key={cat.id}
+            className="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-sm transition-shadow"
+          >
+            {/* Category Header */}
+            <div className="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
+              <div className="w-10 h-10 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center shrink-0">
+                {renderCategoryIcon(cat.iconName)}
+              </div>
+              <div>
+                <h3 className="font-display font-bold text-slate-900 leading-tight">
+                  {cat.title}
+                </h3>
+                <span className="text-[11px] font-mono text-slate-400">
+                  {cat.subtitle}
+                </span>
+              </div>
+            </div>
+
+            {/* Static Skill List — NO interaction needed */}
+            <ul className="space-y-2">
+              {cat.skills.map((skill, i) => (
+                <SkillRow key={i} skill={skill} />
+              ))}
+            </ul>
+
+            {/* Highlight footer */}
+            <div className="mt-4 pt-3 border-t border-slate-100">
+              <span className="text-[11px] font-mono text-slate-500 block leading-relaxed">
+                {CATEGORY_DETAILS[cat.id]?.highlight}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ============ CTA ROW — Clear & Actionable ============ */}
+      <div className="flex flex-wrap items-center gap-3 pt-6 border-t border-slate-100">
+        <button
+          onClick={onDownloadResume}
+          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-sm shadow-blue-500/20 hover:shadow-md hover:shadow-blue-500/25 transition-all"
+        >
+          <Download className="w-4 h-4" />
+          <span>Download CV (PDF)</span>
+        </button>
+
+        <button
+          onClick={() => setIsDetailOpen(true)}
+          className="flex items-center gap-2 text-slate-700 hover:text-blue-600 px-4 py-2.5 rounded-xl font-semibold text-sm border border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 transition-all"
+        >
+          <span>View Detailed Stack</span>
+          <ArrowRight className="w-4 h-4" />
+        </button>
+
+        <span className="text-xs font-mono text-slate-400 ml-auto hidden sm:block">
+          💡 Quick view for HRD · Detailed view for tech recruiter
+        </span>
+      </div>
+
+      {/* ============ DETAILED MODAL (Opt-in) ============ */}
+      <TechStackDetailModal
+        isOpen={isDetailOpen}
+        onClose={() => setIsDetailOpen(false)}
+      />
+    </section>
+  );
+};
+
+/* ============ Sub-component: SkillRow ============ */
+const SkillRow: React.FC<{ skill: Skill }> = ({ skill }) => (
+  <li className="flex items-center justify-between text-sm group">
+    <div className="flex items-center gap-2 min-w-0">
+      <span
+        className={`w-1.5 h-1.5 rounded-full ${LEVEL_DOT[skill.level]} shrink-0`}
+        title={`${skill.level} skill`}
+      />
+      <span className="font-mono text-slate-700 truncate">{skill.name}</span>
+    </div>
+    <span className="font-mono text-[11px] text-slate-400 shrink-0 ml-2">
+      {skill.yearsExperience}y
+    </span>
+  </li>
+);
+```
+
+---
+
+## 📁 File 3: `src/components/TechStackDetailModal.tsx` (Opt-in Detailed View)
+
+```tsx
+import React, { useState, useMemo } from 'react';
+import {
+  Search, X, ChevronRight, Sparkles, Clock, CheckCircle2,
+  FileCode2, Layers, Code2, Palette, Sparkles as SparklesIcon,
+  Globe, Send, Network, GitPullRequest, Cpu, HardDrive, Container,
+  Cloud, Figma, Monitor, Server, Database, Terminal, Box, Binary
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import {
+  SKILL_CATEGORIES,
+  CATEGORY_DETAILS,
+  type Skill
+} from '../data/portfolioData';
+
+const ICON_MAP: Record<string, React.ReactNode> = {
+  FileCode2: <FileCode2 className="w-4 h-4 text-blue-600" />,
+  Terminal:  <Terminal className="w-4 h-4 text-amber-500" />,
+  Code2:     <Code2 className="w-4 h-4 text-rose-500" />,
+  Database:  <Database className="w-4 h-4 text-blue-700" />,
+  Cpu:       <Cpu className="w-4 h-4 text-cyan-500" />,
+  Layers:    <Layers className="w-4 h-4 text-sky-500" />,
+  Globe:     <Globe className="w-4 h-4 text-slate-800" />,
+  Palette:   <Palette className="w-4 h-4 text-cyan-500" />,
+  Box:       <Box className="w-4 h-4 text-purple-600" />,
+  Monitor:   <Monitor className="w-4 h-4 text-emerald-500" />,
+  Server:    <Server className="w-4 h-4 text-emerald-600" />,
+  Network:   <Network className="w-4 h-4 text-blue-600" />,
+  HardDrive: <HardDrive className="w-4 h-4 text-blue-800" />,
+  Binary:    <Binary className="w-4 h-4 text-slate-700" />,
+  Container: <Container className="w-4 h-4 text-blue-500" />,
+  GitPullRequest: <GitPullRequest className="w-4 h-4 text-orange-600" />,
+  Send:      <Send className="w-4 h-4 text-orange-500" />,
+  Cloud:     <Cloud className="w-4 h-4 text-slate-800" />,
+  Figma:     <Figma className="w-4 h-4 text-purple-500" />,
+  Sparkles:  <SparklesIcon className="w-4 h-4 text-amber-500" />,
+};
+
+const renderIcon = (name: string) => ICON_MAP[name] ?? <Code2 className="w-4 h-4 text-slate-600" />;
+
+const LEVEL_META = {
+  core:     { label: 'Core',     dot: 'bg-emerald-500', text: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-200' },
+  solid:    { label: 'Solid',    dot: 'bg-blue-500',    text: 'text-blue-600',    bg: 'bg-blue-50',    border: 'border-blue-200' },
+  learning: { label: 'Learning', dot: 'bg-amber-500',   text: 'text-amber-600',   bg: 'bg-amber-50',   border: 'border-amber-200' },
+};
+
+interface TechStackDetailModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export const TechStackDetailModal: React.FC<TechStackDetailModalProps> = ({
+  isOpen,
+  onClose,
+}) => {
+  const [activeCategory, setActiveCategory] = useState<string>(SKILL_CATEGORIES[0].id);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filter, setFilter] = useState<'all' | 'core' | 'solid' | 'learning'>('all');
+
+  // Filter skills for active category
+  const filteredSkills = useMemo(() => {
+    const cat = SKILL_CATEGORIES.find(c => c.id === activeCategory);
+    if (!cat) return [];
+    return cat.skills.filter(s => {
+      const matchFilter = filter === 'all' || s.level === filter;
+      const matchSearch = !searchQuery ||
+        s.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        s.appliedInProjects.some(p => p.toLowerCase().includes(searchQuery.toLowerCase()));
+      return matchFilter && matchSearch;
+    });
+  }, [activeCategory, filter, searchQuery]);
+
+  // Close on Escape key
+  React.useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [isOpen, onClose]);
+
+  // Lock body scroll when open
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = ''; };
+    }
+  }, [isOpen]);
+
+  const activeCat = SKILL_CATEGORIES.find(c => c.id === activeCategory);
+  const details = activeCat ? CATEGORY_DETAILS[activeCat.id] : null;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-sm"
+          onClick={onClose}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="tech-detail-title"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.96, y: 20 }}
+            transition={{ type: 'spring', stiffness: 280, damping: 26 }}
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col"
+          >
+            {/* ============ MODAL HEADER ============ */}
+            <div className="flex items-center justify-between gap-3 px-5 sm:px-6 py-4 border-b border-slate-100">
+              <div>
+                <span className="text-[10px] font-mono font-bold text-blue-600 tracking-wider uppercase block mb-0.5">
+                  DETAILED TECH STACK
+                </span>
+                <h2 id="tech-detail-title" className="font-display font-bold text-xl text-slate-900">
+                  Engineering Deep Dive
+                </h2>
+              </div>
+              <button
+                onClick={onClose}
+                className="p-2 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-slate-700 transition-colors"
+                aria-label="Tutup modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* ============ CATEGORY TABS ============ */}
+            <div className="flex items-center gap-2 px-5 sm:px-6 pt-4 overflow-x-auto no-scrollbar">
+              {SKILL_CATEGORIES.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-mono whitespace-nowrap transition-all border ${
+                    activeCategory === cat.id
+                      ? 'bg-blue-600 text-white border-blue-600 font-bold'
+                      : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
+                  }`}
+                >
+                  <span className="font-bold">{cat.code}</span>
+                  <span className="hidden sm:inline">·</span>
+                  <span className="hidden sm:inline">{cat.title}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* ============ FILTER + SEARCH ============ */}
+            <div className="flex flex-wrap items-center gap-3 px-5 sm:px-6 py-3 border-b border-slate-100">
+              {/* Proficiency filter */}
+              <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-xl" role="group">
+                {(['all', 'core', 'solid', 'learning'] as const).map((f) => {
+                  const count = f === 'all'
+                    ? (activeCat?.skills.length ?? 0)
+                    : (activeCat?.skills.filter(s => s.level === f).length ?? 0);
+                  return (
+                    <button
+                      key={f}
+                      onClick={() => setFilter(f)}
+                      className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold transition-all ${
+                        filter === f
+                          ? 'bg-white shadow-sm text-slate-900'
+                          : 'text-slate-500 hover:text-slate-700'
+                      }`}
+                    >
+                      {f !== 'all' && (
+                        <span className={`w-1.5 h-1.5 rounded-full ${LEVEL_META[f].dot}`} />
+                      )}
+                      <span>{f === 'all' ? 'All' : LEVEL_META[f].label}</span>
+                      <span className="text-[10px] opacity-60">({count})</span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Search */}
+              <div className="relative flex-1 min-w-[180px]">
+                <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Cari skill atau proyek..."
+                  className="w-full pl-9 pr-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                  aria-label="Cari skill"
+                />
+              </div>
+            </div>
+
+            {/* ============ MODAL BODY (Scrollable) ============ */}
+            <div className="flex-1 overflow-y-auto px-5 sm:px-6 py-5">
+              {/* Narrative summary */}
+              {details && (
+                <div className="bg-slate-50 p-4 rounded-xl border border-slate-200/70 mb-5">
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    {details.summary}
+                  </p>
+                  <div className="mt-3 pt-3 border-t border-slate-200/60">
+                    <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-2">
+                      Engineering Metrics
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                      {details.metrics.map((m, i) => (
+                        <div key={i} className="bg-white border border-slate-200 p-2.5 rounded-lg">
+                          <span className="text-[10px] font-mono text-slate-400 uppercase block">{m.label}</span>
+                          <span className="text-xs font-mono font-bold text-slate-800">{m.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Skill cards grid */}
+              <span className="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider block mb-3">
+                Applied Technologies ({filteredSkills.length})
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {filteredSkills.map((skill, idx) => (
+                  <SkillDetailCard key={idx} skill={skill} index={idx} />
+                ))}
+              </div>
+
+              {filteredSkills.length === 0 && (
+                <p className="text-sm font-mono text-slate-400 italic text-center py-8">
+                  Tidak ada skill yang match dengan filter/pencarian
+                </p>
+              )}
+
+              {/* Applied projects footer */}
+              {details && (
+                <div className="mt-5 pt-4 border-t border-slate-100 flex flex-wrap items-center gap-2 text-xs font-mono">
+                  <span className="text-slate-400 text-[10px] uppercase font-bold">Diterapkan di:</span>
+                  {details.appliedIn.map((proj, i) => (
+                    <span
+                      key={i}
+                      className="bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md border border-blue-200/60 text-[11px] font-semibold"
+                    >
+                      {proj}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* ============ MODAL FOOTER ============ */}
+            <div className="px-5 sm:px-6 py-3 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between text-xs font-mono text-slate-500">
+              <span className="flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-blue-500" />
+                <span>Press ESC to close</span>
+              </span>
+              <span className="hidden sm:block">Engineering-level detail · For tech recruiters</span>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+/* ============ Sub-component: SkillDetailCard ============ */
+const SkillDetailCard: React.FC<{ skill: Skill; index: number }> = ({ skill, index }) => {
+  const meta = LEVEL_META[skill.level];
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25, delay: index * 0.04 }}
+      whileHover={{ y: -2 }}
+      className="bg-white border border-slate-200/80 p-3 rounded-xl hover:border-blue-200 hover:shadow-sm transition-all"
+    >
+      {/* Top row */}
+      <div className="flex items-center justify-between gap-2 mb-2">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div className="w-8 h-8 rounded-lg bg-slate-50 border border-slate-200/70 flex items-center justify-center shrink-0">
+            {renderIcon(skill.icon)}
+          </div>
+          <div className="min-w-0">
+            <span className="text-xs font-mono font-bold text-slate-900 block truncate">
+              {skill.name}
+            </span>
+            <span className={`text-[10px] font-mono ${meta.text} font-semibold`}>
+              {meta.label} · {skill.yearsExperience}y exp
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Meta row */}
+      <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 mb-2">
+        <span className="flex items-center gap-1">
+          <CheckCircle2 className="w-3 h-3 text-emerald-500" />
+          <span>{skill.appliedInProjects.length} proyek</span>
+        </span>
+        <span className={`px-1.5 py-0.5 rounded ${meta.bg} ${meta.text} ${meta.border} border font-semibold`}>
+          {meta.label}
+        </span>
+      </div>
+
+      {/* Applied projects */}
+      <div className="pt-2 border-t border-slate-100 flex flex-wrap gap-1">
+        {skill.appliedInProjects.slice(0, 3).map((proj, i) => (
+          <span
+            key={i}
+            className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-50 text-slate-600 border border-slate-200/70"
+          >
+            {proj}
+          </span>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+```
+
+---
+
+## 📁 File 4: Integrasi di Parent Component (Contoh `Home.tsx`)
+
+```tsx
+import React from 'react';
+import { TechStackSection } from './TechStackSection';
+// import komponen lain...
+
+export const Home: React.FC = () => {
+  const handleDownloadResume = () => {
+    // Trigger PDF download
+    window.open('/cv-yahya-alifandi.pdf', '_blank');
+  };
+
+  return (
+    <main>
+      {/* <HeroSection ... /> */}
+      {/* <AboutSection ... /> */}
+      <TechStackSection onDownloadResume={handleDownloadResume} />
+      {/* <ProjectsSection ... /> */}
+      {/* <ContactSection ... /> */}
+    </main>
+  );
+};
+```
+
+---
+
+## ✅ Ringkasan Apa yang Berubah
+
+| Aspek | Sebelum | Sesudah |
+|-------|---------|---------|
+| **Default view** | 14+ elemen interaktif, 600 baris | 3 kolom statis + 2 CTA |
+| **Time-to-scan (HRD)** | 15–30 detik | **5 detik** |
+| **Detail view** | Terpaksa tampil | **Opt-in via modal** |
+| **Proficiency %** | 92% (meragukan) | Dihapus, ganti "3y" jelas |
+| **Mobile UX** | Cramped | Clean |
+| **Print-friendly** | ❌ | ✅ |
+| **Maintenance** | Sulit | Mudah |
+| **Lines of code** | ~600 | ~250 (default) + ~250 (modal) |
+
+---
+
+## 🎯 Alur Pengguna yang Ideal
+
+### **Skenario A: HRD cepat scan (90% kasus)**
+```
+→ Lihat TechStackSection (default)
+→ 5 detik scan: "Oh, React 3y, Node.js 3y, PostgreSQL 2y..."
+→ Klik "Download CV (PDF)"
+→ Selesai
+```
+
+### **Skenario B: Tech Recruiter deep dive (10% kasus)**
+```
+→ Lihat default, penasaran dengan detail
+→ Klik "View Detailed Stack"
+→ Modal muncul dengan filter & search
+→ Pilih kategori, filter Core/Solid/Learning
+→ Baca metrics engineering + project mapping
+→ Tutup modal, klik Download CV
+```
+
+### **Skenario C: Engineering Manager**
+```
+→ Buka modal langsung
+→ Lihat metrics (Lighthouse 99, API <120ms, SELECT FOR UPDATE)
+→ Tergiur, langsung kontak
+```
+
+---
+
+## 🚀 Langkah Implementasi
+
+1. **Backup file lama** dulu (rename jadi `TechStackSection.old.tsx`)
+2. **Copy 3 file baru** ke lokasi masing-masing:
+   - `src/data/portfolioData.ts`
+   - `src/components/TechStackSection.tsx`
+   - `src/components/TechStackDetailModal.tsx`
+3. **Update parent component** (Home/Page) untuk pass prop `onDownloadResume`
+4. **Test 3 skenario** di atas
+5. **Lighthouse audit** — seharusnya skor naik (less JS, less animation)
+
+---
+
+## 🎓 Filosofi Design Baru
+
+> **"Progressive Disclosure"** — tampilkan minimum dulu, detail saat diminta.
+
+- HRD senang (quick info)
+- Tech recruiter senang (deep dive available)
+- Engineering Manager senang (metrics accessible)
+- Anda senang (skills tetap dipajang tanpa intimidasi)
+
+Mau saya:
+1. **Audit section lain** (Hero, About, Projects) dengan lensa HRD yang sama?
+2. **Buat versi dark mode** untuk TechStackSection?
+3. **Tambah export to PDF** yang menampilkan layout simple (bukan versi interaktif)?

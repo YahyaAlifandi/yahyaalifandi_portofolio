@@ -1,0 +1,36 @@
+/* ============ Animated Conic Gradient Border ============ */
+.animated-conic-border {
+  background: conic-gradient(
+    from 0deg,
+    #3b82f6 0deg,
+    #8b5cf6 60deg,
+    #ec4899 120deg,
+    #3b82f6 180deg,
+    #06b6d4 240deg,
+    #3b82f6 360deg
+  );
+  animation: conic-spin 6s linear infinite;
+}
+
+@keyframes conic-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mask trick: only show border (1.5px ring) */
+.animated-conic-border::after {
+  content: '';
+  position: absolute;
+  inset: 1.5px;
+  border-radius: inherit;
+  background: transparent;
+}
+
+/* ============ Reduced Motion Override ============ */
+@media (prefers-reduced-motion: reduce) {
+  .animated-conic-border {
+    animation: none;
+    background: #e2e8f0;
+  }
+}

@@ -1,0 +1,722 @@
+src/data/portfolioData.ts
+// Tambahkan interface ini
+export interface Skill {
+  name: string;
+  icon: string;
+  proficiency: number;        // 0-100
+  level: 'core' | 'solid' | 'learning';
+  lastUsed: string;           // "2026-10" format
+  projectCount: number;
+  yearsExperience: number;
+  appliedInProjects: string[]; // nama proyek
+}
+
+export interface SkillCategory {
+  id: string;
+  code: string;
+  title: string;
+  subtitle: string;
+  level: string;
+  footerLabel: string;
+  footerItems: string[];
+  skills: Skill[];
+}
+
+export interface CategoryDetails {
+  summary: string;
+  proficiencyScore: string;
+  appliedIn: string[];
+  metrics: { label: string; value: string }[];
+  highlight: string;
+}
+
+// Update SKILL_CATEGORIES dengan data diperkaya
+export const SKILL_CATEGORIES: SkillCategory[] = [
+  {
+    id: 'core',
+    code: '01',
+    title: 'Core Foundation',
+    subtitle: 'Bahasa & logika fundamental',
+    level: 'Expert',
+    footerLabel: 'Konsep',
+    footerItems: ['Type Safety', 'Async/Await', 'ACID'],
+    skills: [
+      { name: 'TypeScript', icon: 'FileCode2', proficiency: 92, level: 'core', lastUsed: '2026-10', projectCount: 8, yearsExperience: 3, appliedInProjects: ['GampangIn POS', 'JejakKode', 'AetherFlow'] },
+      { name: 'JavaScript', icon: 'Code', proficiency: 95, level: 'core', lastUsed: '2026-10', projectCount: 12, yearsExperience: 4, appliedInProjects: ['GampangIn POS', 'JejakKode', 'AetherFlow'] },
+      { name: 'SQL', icon: 'Database', proficiency: 88, level: 'core', lastUsed: '2026-09', projectCount: 7, yearsExperience: 3, appliedInProjects: ['GampangIn POS', 'JejakKode'] },
+      { name: 'Bash', icon: 'Terminal', proficiency: 75, level: 'solid', lastUsed: '2026-08', projectCount: 5, yearsExperience: 2, appliedInProjects: ['CI/CD Scripts'] },
+    ],
+  },
+  {
+    id: 'frontend',
+    code: '02',
+    title: 'Frontend',
+    subtitle: 'UI/UX, components, performance',
+    level: 'Expert',
+    footerLabel: 'Arsitektur',
+    footerItems: ['App Router', 'Server Components', 'Atomic Design'],
+    skills: [
+      { name: 'React', icon: 'Code2', proficiency: 90, level: 'core', lastUsed: '2026-10', projectCount: 10, yearsExperience: 3, appliedInProjects: ['JejakKode', 'GampangIn Cashier', 'AetherFlow'] },
+      { name: 'Next.js', icon: 'Layers', proficiency: 88, level: 'core', lastUsed: '2026-10', projectCount: 7, yearsExperience: 2, appliedInProjects: ['JejakKode', 'GampangIn POS'] },
+      { name: 'Tailwind CSS', icon: 'Palette', proficiency: 95, level: 'core', lastUsed: '2026-10', projectCount: 11, yearsExperience: 3, appliedInProjects: ['JejakKode', 'GampangIn Cashier'] },
+      { name: 'Zustand', icon: 'Box', proficiency: 80, level: 'solid', lastUsed: '2026-09', projectCount: 4, yearsExperience: 2, appliedInProjects: ['JejakKode'] },
+      { name: 'Framer Motion', icon: 'Sparkles', proficiency: 82, level: 'solid', lastUsed: '2026-10', projectCount: 6, yearsExperience: 2, appliedInProjects: ['Portfolio', 'JejakKode'] },
+      { name: 'HTML5', icon: 'Globe', proficiency: 95, level: 'core', lastUsed: '2026-10', projectCount: 12, yearsExperience: 4, appliedInProjects: ['All Projects'] },
+    ],
+  },
+  {
+    id: 'backend',
+    code: '03',
+    title: 'Backend',
+    subtitle: 'API, auth, database operations',
+    level: 'Advanced',
+    footerLabel: 'Praktik',
+    footerItems: ['REST', 'Edge Middleware', 'Prisma ORM'],
+    skills: [
+      { name: 'Node.js', icon: 'Server', proficiency: 88, level: 'core', lastUsed: '2026-10', projectCount: 9, yearsExperience: 3, appliedInProjects: ['GampangIn POS', 'JejakKode API'] },
+      { name: 'PostgreSQL', icon: 'Database', proficiency: 85, level: 'core', lastUsed: '2026-09', projectCount: 6, yearsExperience: 2, appliedInProjects: ['GampangIn POS', 'JejakKode'] },
+      { name: 'Prisma', icon: 'HardDrive', proficiency: 88, level: 'core', lastUsed: '2026-10', projectCount: 5, yearsExperience: 2, appliedInProjects: ['GampangIn POS', 'JejakKode'] },
+      { name: 'Express', icon: 'Send', proficiency: 80, level: 'solid', lastUsed: '2026-07', projectCount: 4, yearsExperience: 2, appliedInProjects: ['AetherFlow API'] },
+      { name: 'REST API', icon: 'Network', proficiency: 90, level: 'core', lastUsed: '2026-10', projectCount: 9, yearsExperience: 3, appliedInProjects: ['GampangIn POS', 'JejakKode'] },
+      { name: 'JWT Auth', icon: 'GitPullRequest', proficiency: 82, level: 'solid', lastUsed: '2026-09', projectCount: 5, yearsExperience: 2, appliedInProjects: ['GampangIn POS'] },
+    ],
+  },
+  {
+    id: 'devops',
+    code: '04',
+    title: 'DevOps & Tools',
+    subtitle: 'Workflow, containerization, design',
+    level: 'Intermediate',
+    footerLabel: 'Tools',
+    footerItems: ['CI/CD', 'Docker', 'Figma'],
+    skills: [
+      { name: 'Git', icon: 'GitPullRequest', proficiency: 92, level: 'core', lastUsed: '2026-10', projectCount: 12, yearsExperience: 4, appliedInProjects: ['All Projects'] },
+      { name: 'GitHub Actions', icon: 'GitPullRequest', proficiency: 78, level: 'solid', lastUsed: '2026-09', projectCount: 4, yearsExperience: 2, appliedInProjects: ['CI/CD Pipelines'] },
+      { name: 'Docker', icon: 'Container', proficiency: 70, level: 'learning', lastUsed: '2026-08', projectCount: 3, yearsExperience: 1, appliedInProjects: ['Dev Environments'] },
+      { name: 'Vercel', icon: 'Cloud', proficiency: 88, level: 'core', lastUsed: '2026-10', projectCount: 8, yearsExperience: 2, appliedInProjects: ['Production Deploys'] },
+      { name: 'Figma', icon: 'Figma', proficiency: 80, level: 'solid', lastUsed: '2026-10', projectCount: 6, yearsExperience: 2, appliedInProjects: ['Design Translation'] },
+      { name: 'VS Code', icon: 'Monitor', proficiency: 95, level: 'core', lastUsed: '2026-10', projectCount: 12, yearsExperience: 4, appliedInProjects: ['Daily Driver'] },
+    ],
+  },
+];
+
+// Tambahkan konstanta proficiency meta
+export const PROFICIENCY_META = {
+  core:     { label: 'Core Stack',     color: 'emerald', minYears: 2, minProjects: 5 },
+  solid:    { label: 'Solid',          color: 'blue',    minYears: 1, minProjects: 3 },
+  learning: { label: 'Learning',       color: 'amber',   minYears: 0, minProjects: 1 },
+} as const;
+
+// Aggregate stats untuk summary
+export const SKILLS_SUMMARY = {
+  totalSkills: SKILL_CATEGORIES.reduce((acc, c) => acc + c.skills.length, 0),
+  coreCount: SKILL_CATEGORIES.reduce((acc, c) => acc + c.skills.filter(s => s.level === 'core').length, 0),
+  totalProjects: 12,
+  avgProficiency: Math.round(
+    SKILL_CATEGORIES.reduce((acc, c) => acc + c.skills.reduce((s, skill) => s + skill.proficiency, 0), 0) /
+    SKILL_CATEGORIES.reduce((acc, c) => acc + c.skills.length, 0)
+  ),
+  topSkills: ['TypeScript', 'React', 'Node.js', 'PostgreSQL', 'Tailwind'],
+};
+
+src/components/TechStackSection.tsx
+import React, { useState, useEffect, useMemo } from 'react';
+import {
+  Search, Terminal, Code, Database, Cpu, Layers, Globe, Palette, Box,
+  Code2, Monitor, Server, Network, HardDrive, Binary, GitPullRequest,
+  Send, Cloud, Figma, FileCode2, Container, CheckCircle2, ChevronRight,
+  Sparkles, X, Maximize2, Minimize2, TrendingUp, Award, Zap, Clock
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import {
+  SKILL_CATEGORIES,
+  PROFICIENCY_META,
+  SKILLS_SUMMARY,
+  type CategoryDetails
+} from '../data/portfolioData';
+
+interface CategoryDetailsMap {
+  [key: string]: CategoryDetails;
+}
+
+const CATEGORY_DETAILS: CategoryDetailsMap = {
+  core: {
+    summary: 'Fondasi utama penulisan kode terstruktur, modular, dan type-safe. Mengutamakan pemahaman mendalam tentang runtime JavaScript/TypeScript, penanganan async-await, serta eksekusi query basis data relasional.',
+    proficiencyScore: '92% Rata-rata Penguasaan',
+    appliedIn: ['GampangIn POS Engine', 'JejakKode Interactive Sandbox', 'AetherFlow dApp'],
+    highlight: 'Strict Type-Safety & Asynchronous Concurrency',
+    metrics: [
+      { label: 'Type Safety', value: 'Strict Null Checks' },
+      { label: 'DB Querying', value: 'Complex Joins & Indexes' },
+      { label: 'Logika Algoritma', value: 'ACID & Idempotency' }
+    ]
+  },
+  frontend: {
+    summary: 'Perancangan antarmuka web modern dengan fokus pada performa Core Web Vitals (LCP < 0.9s), render modular Next.js App Router, integrasi Tailwind CSS responsif, dan aksesibilitas (a11y).',
+    proficiencyScore: '95% Skor Frontend Web',
+    appliedIn: ['JejakKode Learning Platform', 'GampangIn Cashier UI', 'AetherFlow Web3 Interface'],
+    highlight: 'Core Web Vitals 99+ & Modular Component Architecture',
+    metrics: [
+      { label: 'Core Web Vitals', value: '99/100 Lighthouse' },
+      { label: 'Arsitektur Komponen', value: 'Atomic & Server Components' },
+      { label: 'State Sync', value: 'Zustand Reactive Store' }
+    ]
+  },
+  backend: {
+    summary: 'Pembangunan RESTful API yang scalable, session management via Edge Middleware, proteksi transaksi atomik database dengan Prisma & PostgreSQL, serta optimasi query cache.',
+    proficiencyScore: '90% Keandalan Arsitektur',
+    appliedIn: ['GampangIn Checkout Actions', 'Edge Route Guarding', 'Database Isolation Layer'],
+    highlight: 'Atomic Database Locking & Edge Authorization',
+    metrics: [
+      { label: 'API Latency', value: '< 120ms P95' },
+      { label: 'Concurrency Lock', value: 'SELECT FOR UPDATE' },
+      { label: 'Auth Guard', value: 'JWT Cookie Verification' }
+    ]
+  },
+  devops: {
+    summary: 'Otomatisasi siklus pengembangan dengan Git workflow yang disiplin, isolasi lingkungan container Docker, pipeline CI/CD GitHub Actions, dan ketelitian implementasi dari desain Figma.',
+    proficiencyScore: '85% Standar Praktik',
+    appliedIn: ['Continuous Deployment Vercel', 'Dockerized Dev Environments', 'Figma Design System Porting'],
+    highlight: 'Automated CI/CD & Production-Grade Containerization',
+    metrics: [
+      { label: 'Version Control', value: 'Trunk-Based & Pull Requests' },
+      { label: 'Build Automation', value: 'CI/CD Lint & TypeCheck' },
+      { label: 'Design Fidelity', value: 'Pixel-Perfect Translation' }
+    ]
+  }
+};
+
+const ICON_MAP: Record<string, React.ReactNode> = {
+  FileCode2: <FileCode2 className="w-4 h-4 text-blue-600" />,
+  Terminal:  <Terminal className="w-4 h-4 text-amber-500" />,
+  Code:      <Code className="w-4 h-4 text-sky-600" />,
+  Database:  <Database className="w-4 h-4 text-blue-700" />,
+  Cpu:       <Cpu className="w-4 h-4 text-cyan-500" />,
+  Layers:    <Layers className="w-4 h-4 text-sky-500" />,
+  Globe:     <Globe className="w-4 h-4 text-slate-800" />,
+  Palette:   <Palette className="w-4 h-4 text-cyan-500" />,
+  Box:       <Box className="w-4 h-4 text-purple-600" />,
+  Code2:     <Code2 className="w-4 h-4 text-rose-500" />,
+  Monitor:   <Monitor className="w-4 h-4 text-emerald-500" />,
+  Server:    <Server className="w-4 h-4 text-emerald-600" />,
+  Network:   <Network className="w-4 h-4 text-blue-600" />,
+  HardDrive: <HardDrive className="w-4 h-4 text-blue-800" />,
+  Binary:    <Binary className="w-4 h-4 text-slate-700" />,
+  Container: <Container className="w-4 h-4 text-blue-500" />,
+  GitPullRequest: <GitPullRequest className="w-4 h-4 text-orange-600" />,
+  Send:      <Send className="w-4 h-4 text-orange-500" />,
+  Cloud:     <Cloud className="w-4 h-4 text-slate-800" />,
+  Figma:     <Figma className="w-4 h-4 text-purple-500" />,
+  Sparkles:  <Sparkles className="w-4 h-4 text-amber-500" />,
+};
+
+const renderIcon = (iconName: string) => ICON_MAP[iconName] ?? <Code className="w-4 h-4 text-slate-600" />;
+
+// Proficiency bar color by level
+const PROFICIENCY_COLORS = {
+  core:     { bar: 'bg-emerald-500', text: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-200' },
+  solid:    { bar: 'bg-blue-500',    text: 'text-blue-600',    bg: 'bg-blue-50',    border: 'border-blue-200' },
+  learning: { bar: 'bg-amber-500',   text: 'text-amber-600',   bg: 'bg-amber-50',   border: 'border-amber-200' },
+};
+
+const LEVEL_LABELS = {
+  core: 'Core',
+  solid: 'Solid',
+  learning: 'Learning',
+};
+
+export const TechStackSection: React.FC = () => {
+  const [expandedId, setExpandedId] = useState<string | null>('core');
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeFilter, setActiveFilter] = useState<'all' | 'core' | 'solid' | 'learning'>('all');
+
+  // Auto-expand category containing matched skill
+  useEffect(() => {
+    if (!searchQuery.trim()) return;
+    const q = searchQuery.toLowerCase();
+    for (const cat of SKILL_CATEGORIES) {
+      if (
+        cat.title.toLowerCase().includes(q) ||
+        cat.skills.some((s) => s.name.toLowerCase().includes(q)) ||
+        cat.footerItems.some((f) => f.toLowerCase().includes(q))
+      ) {
+        setExpandedId(cat.id);
+        break;
+      }
+    }
+  }, [searchQuery]);
+
+  // Filtered skills per category
+  const getFilteredSkills = (skills: typeof SKILL_CATEGORIES[0]['skills']) => {
+    return skills.filter(s => {
+      const levelMatch = activeFilter === 'all' || s.level === activeFilter;
+      const searchMatch = !searchQuery ||
+        s.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        s.appliedInProjects.some(p => p.toLowerCase().includes(searchQuery.toLowerCase()));
+      return levelMatch && searchMatch;
+    });
+  };
+
+  // Dynamic z-index for layered stacking
+  const getZIndex = (id: string, index: number) => {
+    if (expandedId === id) return 40;
+    if (hoveredId === id) return 30;
+    return 10 + (SKILL_CATEGORIES.length - index);
+  };
+
+  // Format last used date
+  const formatLastUsed = (dateStr: string) => {
+    const date = new Date(dateStr + '-01');
+    const now = new Date('2026-10-27');
+    const monthsAgo = Math.round((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24 * 30));
+    if (monthsAgo === 0) return 'Bulan ini';
+    if (monthsAgo === 1) return 'Bulan lalu';
+    return `${monthsAgo} bulan lalu`;
+  };
+
+  return (
+    <section id="tech-stack" className="py-16 border-b border-slate-200/80">
+      {/* Section Header */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+        <div>
+          <span className="text-xs font-mono font-bold text-blue-600 tracking-wider uppercase block mb-1">
+            03 // TECHNICAL STACK
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 tracking-tight mb-2">
+            Keahlian Teknis &amp; Tooling Terapan
+          </h2>
+          <p className="text-xs sm:text-sm font-editorial-body text-slate-500 max-w-xl">
+            Teknologi dan perkakas pengembangan yang aktif digunakan dalam pengerjaan proyek nyata dan siap diimplementasikan di lingkungan kerja.
+          </p>
+        </div>
+
+        {/* Filter + Search Controls */}
+        <div className="flex flex-wrap items-center gap-3">
+          {/* Proficiency filter pills */}
+          <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-xl border border-slate-200/60" role="group" aria-label="Filter by proficiency">
+            {(['all', 'core', 'solid', 'learning'] as const).map((filter) => {
+              const count = filter === 'all'
+                ? SKILLS_SUMMARY.totalSkills
+                : SKILL_CATEGORIES.reduce((acc, c) => acc + c.skills.filter(s => s.level === filter).length, 0);
+              return (
+                <button
+                  key={filter}
+                  onClick={() => setActiveFilter(filter)}
+                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold transition-all ${
+                    activeFilter === filter
+                      ? 'bg-white shadow-sm text-slate-900'
+                      : 'text-slate-500 hover:text-slate-700'
+                  }`}
+                  aria-pressed={activeFilter === filter}
+                >
+                  {filter !== 'all' && (
+                    <span className={`w-1.5 h-1.5 rounded-full ${PROFICIENCY_COLORS[filter].bar}`} />
+                  )}
+                  <span>{filter === 'all' ? 'All' : LEVEL_LABELS[filter]}</span>
+                  <span className="text-[10px] opacity-60">({count})</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Search input */}
+          <div className="relative min-w-[220px]">
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Cari (mis. TypeScript, Prisma)..."
+              className="w-full pl-9 pr-7 py-2 bg-white border border-slate-200 rounded-xl text-xs font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 shadow-sm transition-all"
+              aria-label="Cari skill atau teknologi"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-600"
+                aria-label="Hapus pencarian"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+
+          {/* Collapse/Expand toggle */}
+          <button
+            onClick={() => setExpandedId(expandedId ? null : 'core')}
+            className="flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-mono font-medium border border-slate-200/60 transition-colors"
+            title={expandedId ? "Tampilkan Ringkasan Semua Kartu" : "Buka Kartu Utama"}
+            aria-label={expandedId ? "Tutup detail" : "Buka kartu"}
+          >
+            {expandedId ? (
+              <>
+                <Minimize2 className="w-3.5 h-3.5 text-blue-600" />
+                <span className="hidden sm:inline">Tutup Detail</span>
+              </>
+            ) : (
+              <>
+                <Maximize2 className="w-3.5 h-3.5 text-blue-600" />
+                <span className="hidden sm:inline">Buka Kartu</span>
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* ===== Recruiter-Friendly Quick Summary Bar (NEW) ===== */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+        <SummaryCard
+          icon={<Award className="w-4 h-4 text-blue-600" />}
+          label="Total Skills"
+          value={`${SKILLS_SUMMARY.totalSkills}`}
+          sublabel="aktif digunakan"
+        />
+        <SummaryCard
+          icon={<Zap className="w-4 h-4 text-emerald-600" />}
+          label="Core Stack"
+          value={`${SKILLS_SUMMARY.coreCount}`}
+          sublabel="sudah expert"
+        />
+        <SummaryCard
+          icon={<TrendingUp className="w-4 h-4 text-blue-600" />}
+          label="Rata-rata Proficiency"
+          value={`${SKILLS_SUMMARY.avgProficiency}%`}
+          sublabel="cross-stack"
+        />
+        <SummaryCard
+          icon={<CheckCircle2 className="w-4 h-4 text-emerald-600" />}
+          label="Proyek Diselesaikan"
+          value={`${SKILLS_SUMMARY.totalProjects}+`}
+          sublabel="menerapkan stack"
+        />
+      </div>
+
+      {/* Category Tabs / Switcher Bar */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-6 no-scrollbar" role="tablist">
+        {SKILL_CATEGORIES.map((cat) => {
+          const isSelected = expandedId === cat.id;
+          return (
+            <motion.button
+              key={cat.id}
+              role="tab"
+              aria-selected={isSelected}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setExpandedId(isSelected ? null : cat.id)}
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-mono whitespace-nowrap transition-all border ${
+                isSelected
+                  ? 'bg-blue-600 text-white border-blue-600 shadow-sm shadow-blue-500/25 font-bold'
+                  : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+              }`}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-current opacity-80" />
+              <span>{cat.code}</span>
+              <span className="text-[10px] opacity-75 font-normal hidden sm:inline">&bull; {cat.title}</span>
+            </motion.button>
+          );
+        })}
+      </div>
+
+      {/* LAYERED STACKING EXPANDABLE GRID */}
+      <div className="relative">
+        <motion.div
+          layout
+          transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start"
+        >
+          {SKILL_CATEGORIES.map((cat, index) => {
+            const isExpanded = expandedId === cat.id;
+            const isHovered = hoveredId === cat.id;
+            const details = CATEGORY_DETAILS[cat.id] || CATEGORY_DETAILS.core;
+            const currentZIndex = getZIndex(cat.id, index);
+            const filteredSkills = getFilteredSkills(cat.skills);
+
+            let colSpanClass = 'lg:col-span-6';
+            if (expandedId !== null) {
+              colSpanClass = isExpanded ? 'lg:col-span-8 order-first' : 'lg:col-span-4';
+            }
+
+            return (
+              <motion.div
+                key={cat.id}
+                layout
+                style={{ zIndex: currentZIndex }}
+                onMouseEnter={() => setHoveredId(cat.id)}
+                onMouseLeave={() => setHoveredId(null)}
+                transition={{ type: 'spring', stiffness: 320, damping: 28 }}
+                className={`${colSpanClass} relative transition-shadow duration-200`}
+              >
+                <div
+                  onClick={() => { if (!isExpanded) setExpandedId(cat.id); }}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if ((e.key === 'Enter' || e.key === ' ') && !isExpanded) {
+                      e.preventDefault();
+                      setExpandedId(cat.id);
+                    }
+                  }}
+                  aria-expanded={isExpanded}
+                  aria-label={`${cat.title} category, ${cat.skills.length} skills`}
+                  className={`rounded-2xl transition-all duration-300 relative overflow-hidden ${
+                    isExpanded
+                      ? 'bg-white border-2 border-blue-500 shadow-lg shadow-blue-500/10 p-6 sm:p-7 ring-4 ring-blue-500/5'
+                      : isHovered
+                      ? 'bg-white border border-blue-300 shadow-md shadow-slate-200/70 p-5 -translate-y-1 cursor-pointer'
+                      : 'bg-white border border-slate-200/90 shadow-sm p-5 cursor-pointer hover:border-slate-300'
+                  }`}
+                >
+                  {/* Layered depth gradient */}
+                  <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl pointer-events-none transition-opacity duration-300 ${
+                    isExpanded
+                      ? 'bg-gradient-to-br from-blue-500/10 via-indigo-500/5 to-transparent opacity-100'
+                      : 'bg-blue-500/5 opacity-50'
+                  }`} />
+
+                  {/* Top Header */}
+                  <div className="flex items-center justify-between gap-3 pb-3 mb-3 border-b border-slate-100 relative z-10">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-xs font-bold text-blue-600 tracking-wide">{cat.code}</span>
+                      <span className="text-slate-300">&bull;</span>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold bg-blue-50 text-blue-700 border border-blue-200/70">
+                        {cat.level}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      {isExpanded ? (
+                        <button
+                          onClick={(e) => { e.stopPropagation(); setExpandedId(null); }}
+                          className="p-1 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-slate-700 transition-colors"
+                          title="Tutup Kartu"
+                          aria-label="Tutup detail"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      ) : (
+                        <span className="text-[10px] font-mono font-medium text-blue-600 flex items-center gap-0.5 group-hover:underline">
+                          <span>Detail</span>
+                          <ChevronRight className="w-3.5 h-3.5" />
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Title */}
+                  <div className="mb-3 relative z-10">
+                    <h3 className={`font-display font-bold text-slate-900 transition-colors ${
+                      isExpanded ? 'text-2xl sm:text-3xl' : 'text-lg sm:text-xl'
+                    }`}>
+                      {cat.title}
+                    </h3>
+                    <p className="text-xs font-editorial-body text-slate-500 mt-0.5">{cat.subtitle}</p>
+                  </div>
+
+                  {/* ============ COLLAPSED STATE ============ */}
+                  {!isExpanded && (
+                    <div className="space-y-3 relative z-10">
+                      <div className="flex flex-wrap items-center gap-2 pt-1">
+                        {filteredSkills.map((skill, sIdx) => {
+                          const isMatched = searchQuery
+                            ? skill.name.toLowerCase().includes(searchQuery.toLowerCase())
+                            : false;
+                          const colors = PROFICIENCY_COLORS[skill.level];
+                          return (
+                            <div
+                              key={sIdx}
+                              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-mono border transition-all ${
+                                isMatched
+                                  ? 'bg-blue-50 border-blue-400 text-blue-700 ring-2 ring-blue-500/20 font-bold'
+                                  : `${colors.bg} ${colors.border} text-slate-700`
+                              }`}
+                              title={`${skill.name} — ${skill.proficiency}% (${LEVEL_LABELS[skill.level]})`}
+                            >
+                              {renderIcon(skill.icon)}
+                              <span>{skill.name}</span>
+                              <span className={`text-[10px] ${colors.text} font-bold ml-0.5`}>
+                                {skill.proficiency}%
+                              </span>
+                            </div>
+                          );
+                        })}
+                        {filteredSkills.length === 0 && (
+                          <span className="text-[11px] font-mono text-slate-400 italic py-2">
+                            Tidak ada skill match filter
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Footer mini summary */}
+                      <div className="pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px] font-mono text-slate-500">
+                        <span className="truncate max-w-[200px]">{details.highlight}</span>
+                        <span className="text-blue-600 font-semibold shrink-0">Buka ›</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* ============ EXPANDED STATE ============ */}
+                  <AnimatePresence>
+                    {isExpanded && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="space-y-5 pt-1 relative z-10"
+                      >
+                        {/* Narrative Overview */}
+                        <div className="bg-slate-50/80 p-4 rounded-xl border border-slate-200/70 text-xs sm:text-sm font-editorial-body text-slate-600 leading-relaxed">
+                          <p>{details.summary}</p>
+                          <div className="mt-2.5 pt-2 border-t border-slate-200/60 flex items-center justify-between text-xs font-mono text-slate-700">
+                            <span className="text-slate-500 text-[11px]">Standar Implementasi:</span>
+                            <span className="font-bold text-blue-600">{details.proficiencyScore}</span>
+                          </div>
+                        </div>
+
+                        {/* ============ ENHANCED SKILL LIST (with proficiency bar) ============ */}
+                        <div>
+                          <span className="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider block mb-2.5">
+                            DAFTAR TEKNOLOGI &amp; TOOLS TERAPAN
+                          </span>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            {filteredSkills.map((skill, sIdx) => {
+                              const isMatched = searchQuery
+                                ? skill.name.toLowerCase().includes(searchQuery.toLowerCase())
+                                : false;
+                              const colors = PROFICIENCY_COLORS[skill.level];
+                              return (
+                                <motion.div
+                                  key={sIdx}
+                                  whileHover={{ y: -2 }}
+                                  className={`p-3 rounded-xl border transition-all ${
+                                    isMatched
+                                      ? 'bg-blue-50 border-blue-400 ring-2 ring-blue-500/20'
+                                      : 'bg-white border-slate-200/80 hover:border-blue-200 hover:shadow-sm'
+                                  }`}
+                                >
+                                  {/* Top row: icon + name + status */}
+                                  <div className="flex items-center justify-between gap-2 mb-2">
+                                    <div className="flex items-center gap-2.5 min-w-0">
+                                      <div className="w-8 h-8 rounded-lg bg-slate-50 border border-slate-200/70 flex items-center justify-center shrink-0">
+                                        {renderIcon(skill.icon)}
+                                      </div>
+                                      <div className="min-w-0">
+                                        <span className="text-xs font-mono font-bold text-slate-900 block truncate">
+                                          {skill.name}
+                                        </span>
+                                        <span className={`text-[10px] font-mono ${colors.text} font-semibold`}>
+                                          {LEVEL_LABELS[skill.level]} · {skill.yearsExperience}y exp
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div className="flex items-center gap-1 shrink-0">
+                                      <span className={`text-[10px] font-mono ${colors.text} font-bold`}>
+                                        {skill.proficiency}%
+                                      </span>
+                                    </div>
+                                  </div>
+
+                                  {/* Proficiency bar (NEW) */}
+                                  <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden mb-2">
+                                    <motion.div
+                                      initial={{ width: 0 }}
+                                      animate={{ width: `${skill.proficiency}%` }}
+                                      transition={{ duration: 0.6, delay: sIdx * 0.05, ease: 'easeOut' }}
+                                      className={`h-full ${colors.bar} rounded-full`}
+                                    />
+                                  </div>
+
+                                  {/* Meta row: last used + project count */}
+                                  <div className="flex items-center justify-between text-[10px] font-mono text-slate-500">
+                                    <span className="flex items-center gap-1" title={`Terakhir dipakai: ${formatLastUsed(skill.lastUsed)}`}>
+                                      <Clock className="w-3 h-3" />
+                                      <span>{formatLastUsed(skill.lastUsed)}</span>
+                                    </span>
+                                    <span className="flex items-center gap-1">
+                                      <CheckCircle2 className="w-3 h-3 text-emerald-500" />
+                                      <span>{skill.projectCount} proyek</span>
+                                    </span>
+                                  </div>
+
+                                  {/* Applied projects (NEW) */}
+                                  <div className="mt-2 pt-2 border-t border-slate-100 flex flex-wrap gap-1">
+                                    {skill.appliedInProjects.slice(0, 3).map((proj, pIdx) => (
+                                      <span
+                                        key={pIdx}
+                                        className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-50 text-slate-600 border border-slate-200/70"
+                                      >
+                                        {proj}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </motion.div>
+                              );
+                            })}
+                          </div>
+                          {filteredSkills.length === 0 && (
+                            <p className="text-xs font-mono text-slate-400 italic text-center py-4">
+                              Tidak ada skill yang match dengan filter/pencarian
+                            </p>
+                          )}
+                        </div>
+
+                        {/* Architectural Metrics */}
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                          {details.metrics.map((m, mIdx) => (
+                            <div key={mIdx} className="bg-slate-50 border border-slate-200/70 p-3 rounded-xl">
+                              <span className="text-[10px] font-mono text-slate-400 uppercase block">{m.label}</span>
+                              <span className="text-xs font-mono font-bold text-slate-800">{m.value}</span>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Footer Topics */}
+                        <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+                          <div className="flex items-center gap-2">
+                            <span className="text-slate-400 text-[10px] uppercase font-bold">{cat.footerLabel}:</span>
+                            <div className="flex flex-wrap gap-1.5">
+                              {cat.footerItems.map((item, fIdx) => (
+                                <span key={fIdx} className="bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md border border-blue-200/60 text-[11px] font-semibold">
+                                  {item}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="text-[11px] text-slate-500 flex items-center gap-1.5">
+                            <Sparkles className="w-3.5 h-3.5 text-blue-500" />
+                            <span>Diuji di {details.appliedIn[0]}</span>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+/* ============ Sub-component: SummaryCard ============ */
+const SummaryCard: React.FC<{
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  sublabel: string;
+}> = ({ icon, label, value, sublabel }) => (
+  <div className="bg-white border border-slate-200/80 rounded-xl p-3.5 flex items-center gap-3 hover:shadow-sm transition-shadow">
+    <div className="w-9 h-9 rounded-lg bg-slate-50 border border-slate-200/70 flex items-center justify-center shrink-0">
+      {icon}
+    </div>
+    <div className="min-w-0">
+      <div className="flex items-baseline gap-1.5">
+        <span className="font-display font-bold text-lg text-slate-900 leading-none">{value}</span>
+        <span className="text-[10px] font-mono text-slate-400 truncate">{sublabel}</span>
+      </div>
+      <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">{label}</span>
+    </div>
+  </div>
+);
