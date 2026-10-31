@@ -166,7 +166,7 @@ export const GetInTouchSection: React.FC = () => {
                 variants={itemVariants}
                 className="group relative flex flex-col gap-4 p-5 rounded border border-slate-200 bg-slate-50/50 hover:border-blue-600 hover:bg-white transition-all duration-200"
               >
-                <div className="flex items-start justify-between">
+                <div className="flex items-start justify-between flex-col md:flex-row">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded border border-slate-200 bg-white flex items-center justify-center group-hover:border-blue-600 group-hover:text-blue-600 transition-colors">
                       <Icon className="w-5 h-5 text-slate-700 group-hover:text-blue-600 transition-colors" aria-hidden={true} />
@@ -192,7 +192,7 @@ export const GetInTouchSection: React.FC = () => {
                       type="button"
                       onClick={() => handleCopy(method.id, method.value)}
                       aria-label={`Salin ${method.label}`}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-slate-200 bg-white text-xs font-mono font-medium text-slate-600 hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 transition-all shrink-0"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-slate-200 bg-white text-xs font-mono font-medium text-slate-600 hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 transition-all shrink-0 mt-2 md:mt-0"
                     >
                       {isCopied ? (
                         <>
