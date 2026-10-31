@@ -98,18 +98,15 @@ export const CandidateCardModal: React.FC<CandidateCardModalProps> = ({
 
           {/* Action Buttons */}
           <div className="flex items-center gap-3">
-            <motion.button
-            hidden
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => {
-                onClose();
-                onOpenResume();
-              }}
-              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-xl text-xs font-display font-bold shadow-sm shadow-blue-500/25 transition-all"
-            >
-              Lihat Lengkap Resume (CV)
-            </motion.button>
+            <motion.a
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                href="/assets/cv-yahya-alifandi.pdf"
+                download="CV-Yahya-Alifandi.pdf"
+                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-xl text-xs font-display font-bold shadow-sm shadow-blue-500/25 transition-all text-center"
+              >
+                Unduh Resume (CV)
+              </motion.a>
             <a
               href={`https://mail.google.com/mail/?view=cm&to=${PERSONAL_INFO.email}`}
               className="bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 hover:border-blue-300 hover:text-blue-600 px-4 py-2.5 rounded-xl text-xs font-display font-bold shadow-sm transition-all"

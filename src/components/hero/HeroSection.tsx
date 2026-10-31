@@ -115,10 +115,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               />
             </motion.button>
 
-            <motion.button
+            <motion.a
               whileTap={{ scale: 0.98 }}
-              hidden
-              onClick={onOpenResume}
+              href="/assets/CV_Yahya Alifandi.pdf"
+              download="CV-Yahya-Alifandi.pdf"
               className="group flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 hover:border-blue-400 hover:text-blue-600 px-4 py-2.5 rounded-xl font-semibold shadow-sm transition-all duration-200 cursor-pointer"
               aria-label="Unduh CV dalam format PDF"
             >
@@ -127,7 +127,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 aria-hidden="true"
               />
               <span>Unduh CV (PDF)</span>
-            </motion.button>
+            </motion.a>
           </motion.div>
         </div>
 
