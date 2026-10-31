@@ -38,7 +38,7 @@ export const PERSONAL_INFO: PersonalInfo = {
   location: 'Lampung, Indonesia',
 
   githubUrl: 'https://github.com/yahyaalifandi',
-  linkedinUrl: 'https://linkedin.com/in/yahyaalifandi',
+  linkedinUrl: 'https://www.linkedin.com/in/yahya-alifandi-2389b82ab/',
 
   profileImage: '/images/image_profile1.jpg',
   isAvailable: true,

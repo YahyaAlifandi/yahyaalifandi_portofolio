@@ -99,6 +99,7 @@ export const CandidateCardModal: React.FC<CandidateCardModalProps> = ({
           {/* Action Buttons */}
           <div className="flex items-center gap-3">
             <motion.button
+            hidden
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => {

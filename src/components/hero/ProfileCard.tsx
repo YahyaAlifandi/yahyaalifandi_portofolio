@@ -139,6 +139,7 @@ export const ProfileCard: React.FC = () => {
 
               <a
                 href={CV_FILE_PATH}
+                hidden
                 download="Arga-Yahya-Alifandi-CV.pdf"
                 aria-label="Download Curriculum Vitae (PDF)"
                 className="group flex items-center justify-center gap-2 w-full rounded-lg py-2.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-sm font-semibold border border-white/10 shadow-lg shadow-blue-950/20 transition-all duration-200 hover:shadow-blue-500/20 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2"

@@ -261,6 +261,7 @@ export const GetInTouchSection: React.FC = () => {
       {/* ============ CV CTA with Metadata ============ */}
       <motion.a
         href={CV_FILE_PATH}
+        hidden
         download="Arga-Yahya-Alifandi-CV.pdf"
         aria-label="Download Curriculum Vitae (PDF)"
         variants={ctaVariants}

@@ -44,6 +44,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={onOpenResume}
+            hidden
             className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-1.5 rounded-lg text-xs font-heading font-semibold shadow-sm shadow-blue-500/25 transition-all"
           >
             <Download className="w-3.5 h-3.5" />

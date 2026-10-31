@@ -117,6 +117,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
             <motion.button
               whileTap={{ scale: 0.98 }}
+              hidden
               onClick={onOpenResume}
               className="group flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 hover:border-blue-400 hover:text-blue-600 px-4 py-2.5 rounded-xl font-semibold shadow-sm transition-all duration-200 cursor-pointer"
               aria-label="Unduh CV dalam format PDF"
